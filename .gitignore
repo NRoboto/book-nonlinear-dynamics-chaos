@@ -1,1 +1,3 @@
 plots/
+envs/
+**/__pycache__
