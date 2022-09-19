@@ -2,6 +2,8 @@ from typing import Literal, Text, Tuple
 from matplotlib.patches import Wedge, Circle
 from matplotlib.pyplot import axes
 import matplotlib.pyplot as plt
+import numpy as np
+from scipy import integrate
 
 def draw_circle(center: Tuple[float, float], radius: float, angle: float = 0.0, ax: axes = None, type: Literal['full', 'empty', 'none', 'left', 'right', 'bottom', 'top'] = 'full', colors: Tuple[Text, Text] = ['purple', 'white'], **kwargs):
   assert radius > 0, "Radius must be positive"
@@ -31,3 +33,17 @@ def draw_arrow(xy: Tuple[float, float], direction: Literal['left', 'right'], ax:
 
   num_dir = 1 if direction == "right" else -1
   plt.arrow(xy[0] - 0.5 * head_length * num_dir, xy[1], 0.001 * num_dir, 0, head_width=head_width, head_length=head_length, edgecolor='None', facecolor=color, **kwargs)
+
+def plot_second_order_phase_portrait(df, initial_conds, xy_range):
+  X, Y = np.meshgrid(np.linspace(xy_range[0][0], xy_range[0][1], 14), np.linspace(xy_range[1][0], xy_range[1][1], 14))
+
+  dy_dt = np.array(df(0, [X, Y]))
+  dy_dt_normalised = dy_dt / np.linalg.norm(dy_dt, axis=0)
+
+  plt.quiver(X, Y, dy_dt_normalised[0], dy_dt_normalised[1], scale=50, width=.002)
+  for y0 in initial_conds:
+    sol = integrate.solve_ivp(df, [0, 50], y0, max_step=0.01)
+    plt.plot(sol.y[0], sol.y[1])
+
+  plt.xlim(xy_range[0])
+  plt.ylim(xy_range[1])
