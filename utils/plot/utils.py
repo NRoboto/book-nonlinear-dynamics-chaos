@@ -47,3 +47,16 @@ def plot_second_order_phase_portrait(df, initial_conds, xy_range):
 
   plt.xlim(xy_range[0])
   plt.ylim(xy_range[1])
+
+def plot_second_order_phase_portrait_polar(df, initial_conds, max_radius):
+  def df_cartesian(t, y):
+    r = np.sqrt(y[0] ** 2 + y[1] ** 2)
+    theta = np.arctan2(y[1], y[0])
+    [r_dot, theta_dot] = df(t, [r, theta])
+
+    return [r_dot * np.cos(theta) - r * theta_dot * np.sin(theta), r_dot * np.sin(theta) + r * theta_dot * np.cos(theta)]
+
+  initial_conds_cartesian = [[r * np.cos(theta), r * np.sin(theta)] for [r, theta] in initial_conds]
+  xy_range = [[-max_radius, max_radius], [-max_radius, max_radius]]
+  plot_second_order_phase_portrait(df_cartesian, initial_conds_cartesian, xy_range)
+  
