@@ -34,7 +34,7 @@ def draw_arrow(xy: Tuple[float, float], direction: Literal['left', 'right'], ax:
   num_dir = 1 if direction == "right" else -1
   plt.arrow(xy[0] - 0.5 * head_length * num_dir, xy[1], 0.001 * num_dir, 0, head_width=head_width, head_length=head_length, edgecolor='None', facecolor=color, **kwargs)
 
-def plot_second_order_phase_portrait(df, initial_conds, xy_range):
+def plot_second_order_phase_portrait(df, initial_conds, xy_range, solver_options={}, **kwargs):
   X, Y = np.meshgrid(np.linspace(xy_range[0][0], xy_range[0][1], 14), np.linspace(xy_range[1][0], xy_range[1][1], 14))
 
   dy_dt = np.array(df(0, [X, Y]))
@@ -42,13 +42,13 @@ def plot_second_order_phase_portrait(df, initial_conds, xy_range):
 
   plt.quiver(X, Y, dy_dt_normalised[0], dy_dt_normalised[1], scale=50, width=.002)
   for y0 in initial_conds:
-    sol = integrate.solve_ivp(df, [0, 50], y0, max_step=0.01)
-    plt.plot(sol.y[0], sol.y[1])
+    sol = integrate.solve_ivp(df, [0, 100], y0, max_step=0.01, **solver_options)
+    plt.plot(sol.y[0], sol.y[1], **kwargs)
 
   plt.xlim(xy_range[0])
   plt.ylim(xy_range[1])
 
-def plot_second_order_phase_portrait_polar(df, initial_conds, max_radius):
+def plot_second_order_phase_portrait_polar(df, initial_conds, max_radius, solver_options={}, **kwargs):
   def df_cartesian(t, y):
     r = np.sqrt(y[0] ** 2 + y[1] ** 2)
     theta = np.arctan2(y[1], y[0])
@@ -58,5 +58,5 @@ def plot_second_order_phase_portrait_polar(df, initial_conds, max_radius):
 
   initial_conds_cartesian = [[r * np.cos(theta), r * np.sin(theta)] for [r, theta] in initial_conds]
   xy_range = [[-max_radius, max_radius], [-max_radius, max_radius]]
-  plot_second_order_phase_portrait(df_cartesian, initial_conds_cartesian, xy_range)
+  plot_second_order_phase_portrait(df_cartesian, initial_conds_cartesian, xy_range, solver_options=solver_options, **kwargs)
   
