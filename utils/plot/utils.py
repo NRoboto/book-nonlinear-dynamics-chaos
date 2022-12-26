@@ -61,12 +61,13 @@ def plot_second_order_phase_portrait_polar(df, initial_conds, max_radius, solver
   plot_second_order_phase_portrait(df_cartesian, initial_conds_cartesian, xy_range, solver_options=solver_options, **kwargs)
   
 def get_iterative_map_results(fn, init_val, num_iterations):
-  def internal(val, i):
-    if i <= 0:
-      return []
-    s = fn(val)
-    return [s, *internal(s, i - 1)]
-  return internal(init_val, num_iterations)
+  x = init_val
+  acc = [x]
+  for i in range(num_iterations):
+    x = fn(x)
+    acc.append(x)
+
+  return acc
 
 def plot_cobweb(fn, initial_conds, num_iterations = 5, x_range = [-1, 1]):
   x = np.linspace(*x_range, num=500)
