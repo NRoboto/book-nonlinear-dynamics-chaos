@@ -1,13 +1,14 @@
-name: base
+name: /Users/mike/Projects/nonlinear-dynamics-and-chaos/env
 channels:
   - defaults
 dependencies:
   - appnope=0.1.2=py39hecd8cb5_1001
   - asttokens=2.0.5=pyhd3eb1b0_0
   - backcall=0.2.0=pyhd3eb1b0_0
+  - blas=1.0=mkl
   - brotlipy=0.7.0=py39h9ed2024_1003
-  - ca-certificates=2022.4.26=hecd8cb5_0
-  - certifi=2022.5.18.1=py39hecd8cb5_0
+  - ca-certificates=2022.10.11=hecd8cb5_0
+  - certifi=2022.12.7=py39hecd8cb5_0
   - cffi=1.15.0=py39hc55c11b_1
   - charset-normalizer=2.0.4=pyhd3eb1b0_0
   - conda=4.13.0=py39hecd8cb5_0
@@ -17,7 +18,9 @@ dependencies:
   - decorator=5.1.1=pyhd3eb1b0_0
   - entrypoints=0.4=py39hecd8cb5_0
   - executing=0.8.3=pyhd3eb1b0_0
+  - fftw=3.3.9=h9ed2024_1
   - idna=3.3=pyhd3eb1b0_0
+  - intel-openmp=2021.4.0=hecd8cb5_3538
   - ipykernel=6.9.1=py39hecd8cb5_0
   - ipython=8.3.0=py39hecd8cb5_0
   - jedi=0.18.1=py39hecd8cb5_1
@@ -25,11 +28,19 @@ dependencies:
   - jupyter_core=4.10.0=py39hecd8cb5_0
   - libcxx=12.0.0=h2f01273_0
   - libffi=3.3=hb1e8313_2
+  - libgfortran=5.0.0=11_3_0_hecd8cb5_28
+  - libgfortran5=11.3.0=h9dfd629_28
   - libsodium=1.0.18=h1de35cc_0
+  - llvm-openmp=14.0.6=h0dcd299_0
   - matplotlib-inline=0.1.2=pyhd3eb1b0_2
+  - mkl=2021.4.0=hecd8cb5_637
+  - mkl-service=2.4.0=py39h9ed2024_0
+  - mkl_fft=1.3.1=py39h4ab4a9b_0
+  - mkl_random=1.2.2=py39hb2f4e1b_0
   - ncurses=6.3=hca72f7f_2
   - nest-asyncio=1.5.5=py39hecd8cb5_0
-  - openssl=1.1.1o=hca72f7f_0
+  - numpy-base=1.21.5=py39h3b1a694_3
+  - openssl=1.1.1s=hca72f7f_0
   - parso=0.8.3=pyhd3eb1b0_0
   - pexpect=4.8.0=pyhd3eb1b0_3
   - pickleshare=0.7.5=pyhd3eb1b0_1003
@@ -49,6 +60,7 @@ dependencies:
   - readline=8.1.2=hca72f7f_1
   - requests=2.27.1=pyhd3eb1b0_0
   - ruamel_yaml=0.15.100=py39h9ed2024_0
+  - scipy=1.9.3=py39h3d31255_0
   - setuptools=61.2.0=py39hecd8cb5_0
   - six=1.16.0=pyhd3eb1b0_1
   - sqlite=3.38.3=h707629a_0
@@ -193,4 +205,4 @@ dependencies:
     - wrapt==1.13.3
     - zict==2.0.0
     - zipp==3.7.0
-prefix: /usr/local/Caskroom/miniconda/base
+prefix: /Users/mike/Projects/nonlinear-dynamics-and-chaos/env
