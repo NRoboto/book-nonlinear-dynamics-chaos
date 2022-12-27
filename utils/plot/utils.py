@@ -63,7 +63,7 @@ def plot_second_order_phase_portrait_polar(df, initial_conds, max_radius, solver
 def get_iterative_map_results(fn, init_val, num_iterations):
   x = init_val
   acc = [x]
-  for i in range(num_iterations):
+  for _ in range(num_iterations):
     x = fn(x)
     acc.append(x)
 
@@ -81,3 +81,10 @@ def plot_cobweb(fn, initial_conds, num_iterations = 5, x_range = [-1, 1]):
     xs = np.roll(ys, 1)
     xs[0] = init
     plt.plot(xs, ys)
+
+def plot_orbit_diagram(fn, init_val = .5, r_range = [1, 4], num_rs = 1000, num_iterations = 600, transient_iteration_count=300):
+  rs = np.linspace(r_range[0], r_range[1], num_rs)
+
+  for r in rs:
+    values = get_iterative_map_results(fn(r), init_val, num_iterations)[transient_iteration_count:]
+    plt.scatter([r for _ in values], values, color="black", s=.1)
